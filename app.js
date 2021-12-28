@@ -1,25 +1,35 @@
-const ageCheckName = document.getElementById('name');
-const ageCheckYear = document.getElementById('year');
-const ageCheckBtn = document.getElementById('button');
-const ageCheckAns = document.getElementById('answor');
+// Input Form HTML
+const formName = document.getElementById('name');
+const nameMassage = document.getElementById('name-massage');
 
+const formYear = document.getElementById('year');
+const yearMassage = document.getElementById('year-massage');
 
-ageCheckBtn.addEventListener('click' , function(){
-    if( ageCheckName.value == "" || ageCheckYear.value == "" ){
-        return ageCheckAns.innerHTML = `<p class=" alert alert-danger">All files are required</p> `
-    }else{
-        ageCheckAns.innerHTML = (ageCheck(ageCheckName.value , ageCheckYear.value))
-        ageCheckName.value = ""
-        ageCheckYear.value = ""
-        ageCheckBtn.innerHTML = ('Done')
+const button = document.getElementById('button');
+const massage = document.getElementById('massage');
+
+formName.addEventListener('keydown', () => {
+    nameMassage.innerHTML = "";
+    massage.innerHTML = '';
+    button.value = 'Submit';
+})
+formYear.addEventListener('keydown', () => {
+    yearMassage.innerHTML = "";
+    massage.innerHTML = '';
+    button.value = 'Submit';
+})
+
+button.addEventListener('click', () => {
+    if (formName.value === "") {
+        nameMassage.innerHTML = "* Name Required ";
+    } else if (/^[0-9]{4}$/.test(formYear.value) === false) {
+        yearMassage.innerHTML = "* Type Birth Year in 4 Digit";
+    } else {
+        massage.innerHTML = ageCal(formName.value , formYear.value)
+        formName.value = "";
+        formYear.value = "";
+        button.value = 'OK';
     }
+  
+    
 })
-ageCheckName.addEventListener('click', ( ) => {
-    ageCheckAns.innerHTML = ('')
-})
-ageCheckYear.addEventListener('click', ( ) => {
-    ageCheckAns.innerHTML = ('')
-})
-
-
-
